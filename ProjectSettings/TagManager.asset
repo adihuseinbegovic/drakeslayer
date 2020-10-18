@@ -61,3 +61,6 @@ TagManager:
   - name: Bullet
     uniqueID: 3419879689
     locked: 0
+  - name: FrontMenu
+    uniqueID: 1103207797
+    locked: 0
