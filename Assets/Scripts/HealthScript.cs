@@ -18,6 +18,12 @@ public class HealthScript : MonoBehaviour
         {
             // Dead!
             Destroy(gameObject);
+
+            // if is enemy killed -> increase the score counter
+            if (isEnemy)
+            {
+                CommonUtils.IncreaseScore(1000);
+            }
         }
     }
 

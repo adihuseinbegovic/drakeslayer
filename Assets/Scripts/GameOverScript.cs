@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameOverScript : MonoBehaviour {
+    private const string SceneName = "StartGameScene";
     private Button[] buttons;
 
     void Awake()
@@ -35,7 +36,7 @@ public class GameOverScript : MonoBehaviour {
     public void ExitToMenu()
     {
         // Reload the level
-        SceneManager.LoadScene("StartGameScene");
+        SceneManager.LoadScene(SceneName);
     }
 
     public void RestartGame()

@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
+
+
     /// <summary>
     /// 1 - The speed of the ship
     /// </summary>
@@ -26,7 +29,6 @@ public class PlayerScript : MonoBehaviour {
         // 5 - Shooting
         bool shoot = Input.GetButtonDown("Fire1");
         shoot |= Input.GetButtonDown("Fire2");
-        // Careful: For Mac users, ctrl + arrow is a bad idea
 
         if (shoot)
         {
@@ -40,28 +42,20 @@ public class PlayerScript : MonoBehaviour {
 
         // 6 - Make sure we are not outside the camera bounds
         var dist = (transform.position - Camera.main.transform.position).z;
-
-        var leftBorder = Camera.main.ViewportToWorldPoint(
-          new Vector3(0, 0, dist)
-        ).x;
-
-        var rightBorder = Camera.main.ViewportToWorldPoint(
-          new Vector3(1, 0, dist)
-        ).x;
-
-        var topBorder = Camera.main.ViewportToWorldPoint(
-          new Vector3(0, 0, dist)
-        ).y;
-
-        var bottomBorder = Camera.main.ViewportToWorldPoint(
-          new Vector3(0, 1, dist)
-        ).y;
+        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
+        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
+        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y;
+        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y;
 
         transform.position = new Vector3(
           Mathf.Clamp(transform.position.x, leftBorder, rightBorder),
           Mathf.Clamp(transform.position.y, topBorder, bottomBorder),
           transform.position.z
         );
+
+
+        // count the score with a +1
+        CommonUtils.IncreaseScore(1);
 
     }
 
@@ -74,6 +68,8 @@ public class PlayerScript : MonoBehaviour {
         rigidbodyComponent.velocity = movement;
     }
 
+    // When a collision with a player occurs
+    // damage the player
     private void OnCollisionEnter2D(Collision2D collision)
     {
         bool damagePlayer = true;
@@ -104,6 +100,9 @@ public class PlayerScript : MonoBehaviour {
     {
         // Game Over.
         var gameOver = FindObjectOfType<GameOverScript>();
-        gameOver.ShowButtons();
+        if (gameOver != null)
+        {
+            gameOver.ShowButtons();
+        }
     }
 }
