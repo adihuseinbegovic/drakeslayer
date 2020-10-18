@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour {
     // damage the player
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        bool damagePlayer = true;
+        bool damagePlayer = false;
 
         // Collision with enemy
         EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();

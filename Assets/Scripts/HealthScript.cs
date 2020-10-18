@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
     public int hp = 3;
     public bool isEnemy = true;
+    private GameObject healthNumberTextObject;
+
 
     /// <summary>
     /// Inflicts damage and check if the object should be destroyed
@@ -13,7 +16,12 @@ public class HealthScript : MonoBehaviour
     /// <param name="damageCount"></param>
     public void Damage(int damageCount)
     {
-        hp = hp - damageCount;
+        hp -= damageCount;
+        if (!isEnemy)
+        {
+            SetHealthText();
+        }
+
         if (hp <= 0)
         {
             // Dead!
@@ -23,7 +31,7 @@ public class HealthScript : MonoBehaviour
             if (isEnemy)
             {
                 CommonUtils.IncreaseScore(1000);
-            }
+            } 
         }
     }
 
@@ -41,6 +49,21 @@ public class HealthScript : MonoBehaviour
                 // Destroy the shot
                 Destroy(shot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
             }
+        }
+    }
+
+    private void Start()
+    {
+        healthNumberTextObject = GameObject.FindWithTag("HealthNumberText");
+        SetHealthText();
+    }
+
+    private void SetHealthText()
+    {
+        if (healthNumberTextObject != null)
+        {
+            var healthText = healthNumberTextObject.GetComponent<Text>();
+            healthText.text = hp.ToString();
         }
     }
 }
