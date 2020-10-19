@@ -14,4 +14,17 @@ public static class CommonUtils
             score.text = (int.Parse(score.text) + value).ToString();
         }
     }
+
+    public static int getScore()
+    {
+        int result = 0;
+        GameObject scoreNumberTextObject = GameObject.FindWithTag("ScoreNumberText");
+        if (scoreNumberTextObject != null)
+        {
+            var score = scoreNumberTextObject.GetComponent<Text>();
+            result = int.Parse(score.text);
+        }
+
+        return result;
+    }
 }

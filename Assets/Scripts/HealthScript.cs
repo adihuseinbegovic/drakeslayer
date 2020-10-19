@@ -17,10 +17,6 @@ public class HealthScript : MonoBehaviour
     public void Damage(int damageCount)
     {
         hp -= damageCount;
-        if (!isEnemy)
-        {
-            SetHealthText();
-        }
 
         if (hp <= 0)
         {
@@ -46,20 +42,25 @@ public class HealthScript : MonoBehaviour
             {
                 Damage(shot.damage);
 
+                if (shot.isEnemyShot)
+                {
+                    SetPlayerHealthText();
+                }
+
                 // Destroy the shot
                 Destroy(shot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
             }
         }
     }
 
-    private void Start()
+    public void SetPlayerHealthText()
     {
-        healthNumberTextObject = GameObject.FindWithTag("HealthNumberText");
-        SetHealthText();
-    }
 
-    private void SetHealthText()
-    {
+        if (healthNumberTextObject == null)
+        {
+            healthNumberTextObject = GameObject.FindGameObjectWithTag("HealthNumberText");
+        }
+
         if (healthNumberTextObject != null)
         {
             var healthText = healthNumberTextObject.GetComponent<Text>();

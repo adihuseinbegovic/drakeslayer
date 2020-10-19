@@ -110,4 +110,13 @@ public class PlayerScript : MonoBehaviour {
             gameOver.ShowButtons();
         }
     }
+
+    private void Start()
+    {
+        HealthScript playerHealth = this.GetComponent<HealthScript>();
+        if (playerHealth != null)
+        {
+            playerHealth.SetPlayerHealthText();
+        }
+    }
 }
