@@ -41,6 +41,18 @@ public class GameOverScript : MonoBehaviour {
     public void RestartGame()
     {
         // Reload the level
-        SceneManager.LoadScene("MainScene");
+        Scene activeScene = SceneManager.GetActiveScene();
+
+        if (activeScene != null)
+        {
+            if ("EasyPlayerScene".Equals(activeScene.name))
+            {
+                SceneManager.LoadScene("EasyPlayerScene");
+            }
+            else if ("NormalPlayerScene".Equals(activeScene.name))
+            {
+                SceneManager.LoadScene("NormalPlayerScene");
+            }
+        }
     }
 }

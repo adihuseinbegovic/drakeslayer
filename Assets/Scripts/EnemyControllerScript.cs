@@ -72,7 +72,8 @@ public class EnemyControllerScript : MonoBehaviour
         float enemyHeight = enemy.GetComponent<Renderer>().bounds.size.y;
         return Camera.main.ScreenToWorldPoint(
             new Vector3(
-                Random.Range(Screen.width - Screen.width/4, Screen.width),
+                //Random.Range(Screen.width - Screen.width/4, Screen.width), // last 1/4th of the camera
+                Random.Range(Screen.width, Screen.width + Screen.width / 5),
                 Random.Range(0 + enemyHeight, Screen.height - enemyHeight),
                 Camera.main.farClipPlane / 2));
     }

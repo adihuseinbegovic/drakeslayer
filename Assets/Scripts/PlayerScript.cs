@@ -15,6 +15,8 @@ public class PlayerScript : MonoBehaviour {
     // 2 - Store the movement and the component
     private Vector2 movement;
     private Rigidbody2D rigidbodyComponent;
+    public bool hasShrink;
+    private bool alreadyShrunk;
 
     void Update()
     {
@@ -41,11 +43,38 @@ public class PlayerScript : MonoBehaviour {
             }
         }
 
+        // here we check input for the shrink and execute it
+        CheckActivateShrink();
+
         OutsideOfCamera();
 
         // count the score with a +1
         CommonUtils.IncreaseScore(1);
 
+    }
+
+    // check if the user activated shrink
+    private void CheckActivateShrink()
+    {
+        bool inputC = Input.GetButtonDown("Shrink");
+
+        if (inputC && hasShrink && !alreadyShrunk)
+        {
+            gameObject.transform.localScale = gameObject.transform.localScale / 2;
+            alreadyShrunk = true;
+            hasShrink = false;
+            Invoke(nameof(ReturnToNormalSize), 5);
+        }
+    }
+
+    // return the player to the normal size
+    private void ReturnToNormalSize()
+    {
+        if (alreadyShrunk)
+        {
+            gameObject.transform.localScale = gameObject.transform.localScale * 2;
+            alreadyShrunk = false;
+        }
     }
 
     void FixedUpdate()
@@ -113,6 +142,9 @@ public class PlayerScript : MonoBehaviour {
 
     private void Start()
     {
+        hasShrink = false;
+        alreadyShrunk = false;
+
         HealthScript playerHealth = this.GetComponent<HealthScript>();
         if (playerHealth != null)
         {
