@@ -35,7 +35,8 @@ public class GameOverScript : MonoBehaviour {
     public void ExitToMenu()
     {
         // Reload the level
-        SceneManager.LoadScene("StartGameScene");
+        string startGameSceneName = "StartGameScene";
+        SceneManager.LoadScene(startGameSceneName);
     }
 
     public void RestartGame()
@@ -45,13 +46,15 @@ public class GameOverScript : MonoBehaviour {
 
         if (activeScene != null)
         {
-            if ("EasyPlayerScene".Equals(activeScene.name))
+            string easyPlayerSceneName = "EasyPlayerScene";
+            string normalPlayerSceneName = "NormalPlayerScene";
+            if (easyPlayerSceneName.Equals(activeScene.name))
             {
-                SceneManager.LoadScene("EasyPlayerScene");
+                SceneManager.LoadScene(easyPlayerSceneName);
             }
-            else if ("NormalPlayerScene".Equals(activeScene.name))
+            else if (normalPlayerSceneName.Equals(activeScene.name))
             {
-                SceneManager.LoadScene("NormalPlayerScene");
+                SceneManager.LoadScene(normalPlayerSceneName);
             }
         }
     }
