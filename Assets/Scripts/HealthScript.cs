@@ -9,11 +9,6 @@ public class HealthScript : MonoBehaviour
     public bool isEnemy = true;
     private GameObject healthNumberTextObject;
 
-
-    /// <summary>
-    /// Inflicts damage and check if the object should be destroyed
-    /// </summary>
-    /// <param name="damageCount"></param>
     public void Damage(int damageCount)
     {
         hp -= damageCount;
@@ -33,11 +28,10 @@ public class HealthScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
-        // Is this a shot?
         ShotScript shot = otherCollider.gameObject.GetComponent<ShotScript>();
         if (shot != null)
         {
-            // Avoid friendly fire
+            // dont kill yourself
             if (shot.isEnemyShot != isEnemy)
             {
                 Damage(shot.damage);
@@ -47,15 +41,13 @@ public class HealthScript : MonoBehaviour
                     SetPlayerHealthText();
                 }
 
-                // Destroy the shot
-                Destroy(shot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
+                Destroy(shot.gameObject);
             }
         }
     }
 
     public void SetPlayerHealthText()
     {
-
         if (healthNumberTextObject == null)
         {
             healthNumberTextObject = GameObject.FindGameObjectWithTag("HealthNumberText");

@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class PlayerScript : MonoBehaviour {
 
-
-    /// <summary>
-    /// 1 - The speed of the ship
-    /// </summary>
     public Vector2 speed = new Vector2(5, 5);
-
-    // 2 - Store the movement and the component
     private Vector2 movement;
     private Rigidbody2D rigidbodyComponent;
     public bool hasShrink;
@@ -79,14 +69,15 @@ public class PlayerScript : MonoBehaviour {
 
     void FixedUpdate()
     {
-        // 6 - Get the component and store the reference
-        if (rigidbodyComponent == null) rigidbodyComponent = GetComponent<Rigidbody2D>();
+        if (rigidbodyComponent == null)
+        {
+            rigidbodyComponent = GetComponent<Rigidbody2D>();
+        }
 
-        // 7 - Move the game object
         rigidbodyComponent.velocity = movement;
     }
 
-    // 6 - Make sure we are not outside the camera bounds
+    // not outside the camera
     private void OutsideOfCamera()
     {
         var dist = (transform.position - Camera.main.transform.position).z;
@@ -102,11 +93,9 @@ public class PlayerScript : MonoBehaviour {
         );
     }
 
-    // When a collision with a player occurs
-    // damage the player
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        bool damagePlayer = false;
+        bool damagePlayer = true;
 
         // Collision with enemy
         EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
@@ -126,13 +115,13 @@ public class PlayerScript : MonoBehaviour {
             if (playerHealth != null)
             {
                 playerHealth.Damage(1);
+                playerHealth.SetPlayerHealthText();
             }
         }
     }
 
     void OnDestroy()
     {
-        // Game Over.
         var gameOver = FindObjectOfType<GameOverScript>();
         if (gameOver != null)
         {

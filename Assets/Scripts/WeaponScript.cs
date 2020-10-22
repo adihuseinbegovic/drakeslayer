@@ -1,27 +1,10 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Launch projectile
-/// </summary>
 public class WeaponScript : MonoBehaviour {
-    //--------------------------------
-    // 1 - Designer variables
-    //--------------------------------
-
-    /// <summary>
-    /// Projectile prefab for shooting
-    /// </summary>
+  
     public Transform shotPrefab;
-
-    /// <summary>
-    /// Cooldown in seconds between two shots
-    /// </summary>
     public float shootingRate = 0.20f;
-
-    //--------------------------------
-    // 2 - Cooldown
-    //--------------------------------
-
+    public int shotDamage = 1;
     private float shootCooldown;
 
     void Start()
@@ -37,13 +20,6 @@ public class WeaponScript : MonoBehaviour {
         }
     }
 
-    //--------------------------------
-    // 3 - Shooting from another script
-    //--------------------------------
-
-    /// <summary>
-    /// Create a new projectile if possible
-    /// </summary>
     public void Attack(bool isEnemy)
     {
         if (CanAttack)
@@ -61,6 +37,11 @@ public class WeaponScript : MonoBehaviour {
             if (shot != null)
             {
                 shot.isEnemyShot = isEnemy;
+
+                if (!isEnemy)
+                {
+                    shot.damage = shotDamage;
+                }
             }
 
             // Make the weapon shot always towards it
@@ -75,14 +56,5 @@ public class WeaponScript : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// Is the weapon ready to create a new projectile?
-    /// </summary>
-    public bool CanAttack
-    {
-        get
-        {
-            return shootCooldown <= 0f;
-        }
-    }
+    public bool CanAttack => shootCooldown <= 0f;
 }

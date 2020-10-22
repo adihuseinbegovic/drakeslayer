@@ -7,14 +7,12 @@ public class EnemyControllerScript : MonoBehaviour
     public GameObject enemy;
     private int stage = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         stage = 0;
-        InvokeRepeating("SpawnEnemy", 0f, Random.Range(5f, 9f));
+        InvokeRepeating(nameof(SpawnEnemy), 0f, Random.Range(5f, 9f));
     }
 
-    // Update is called once per frame
     void Update()
     {
         int score = CommonUtils.getScore();
@@ -62,12 +60,12 @@ public class EnemyControllerScript : MonoBehaviour
     {
         if (stage >= 3)
         {
-            Instantiate(enemy, getRandomPositionForEnemySpawn(), Quaternion.identity);
+            Instantiate(enemy, GetRandomPositionForEnemySpawn(), Quaternion.identity);
         }
-        Instantiate(enemy, getRandomPositionForEnemySpawn(), Quaternion.identity);
+        Instantiate(enemy, GetRandomPositionForEnemySpawn(), Quaternion.identity);
     }
 
-    private Vector3 getRandomPositionForEnemySpawn()
+    private Vector3 GetRandomPositionForEnemySpawn()
     {
         float enemyHeight = enemy.GetComponent<Renderer>().bounds.size.y;
         return Camera.main.ScreenToWorldPoint(

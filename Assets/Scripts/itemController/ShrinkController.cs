@@ -13,12 +13,6 @@ public class ShrinkController : MonoBehaviour
         InvokeRepeating("SpawnDiamond", 0f, 15f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SpawnDiamond()
     {
         Instantiate(diamond, getRandomPositionForDiamondSpawn(), Quaternion.identity);

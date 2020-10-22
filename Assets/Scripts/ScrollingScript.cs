@@ -2,9 +2,6 @@
 using System.Linq;
 using UnityEngine;
 
-/// <summary>
-/// Parallax scrolling script that should be assigned to a layer
-/// </summary>
 public class ScrollingScript : MonoBehaviour {
 
     public Vector2 speed = new Vector2(10, 10);
@@ -12,12 +9,8 @@ public class ScrollingScript : MonoBehaviour {
     public bool isLinkedToCamera = false;
     public bool isLooping = false;
 
-    /// <summary>
-    /// 2 - List of children with a renderer.
-    /// </summary>
     private List<SpriteRenderer> backgroundPart;
 
-    // 3 - Get all the children
     void Start()
     {
         // For infinite background only

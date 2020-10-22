@@ -1095,22 +1095,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Extensions:
-
-    * Shrink item
-
-    * Ship selection
-
-
-    Controls:
-
-    *
-    Move with arrows
-
-    * Shoot with "space" or "left-click"
-
-    * Shrink with
-    "c"'
+  m_Text: "Extensions:\n* Shrink item\n* Ship selection\n\nControls:\n* Move with
+    arrows or WASD\n* Shoot with \"space\" or \"left-click\"\n* Shrink with \"c\"
+    \n** Item: Light-blue Orb"
 --- !u!222 &2088306370
 CanvasRenderer:
   m_ObjectHideFlags: 0

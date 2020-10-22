@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2009210539}
   - component: {fileID: 2009210540}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 1528376021264237716, guid: c407f15f262104bf0aa49e8605476748,
     type: 3}
-  shootingRate: 2
+  shootingRate: 2.2
+  shotDamage: 1
 --- !u!114 &2009210540
 MonoBehaviour:
   m_ObjectHideFlags: 0

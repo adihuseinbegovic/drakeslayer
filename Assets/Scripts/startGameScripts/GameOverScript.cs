@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -18,17 +16,17 @@ public class GameOverScript : MonoBehaviour {
 
     public void HideButtons()
     {
-        foreach (var b in buttons)
+        foreach (var button in buttons)
         {
-            b.gameObject.SetActive(false);
+            button.gameObject.SetActive(false);
         }
     }
 
     public void ShowButtons()
     {
-        foreach (var b in buttons)
+        foreach (var button in buttons)
         {
-            b.gameObject.SetActive(true);
+            button.gameObject.SetActive(true);
         }
     }
 
